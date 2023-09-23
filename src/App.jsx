@@ -21,7 +21,7 @@ function App() {
   })
   
   
-  // null es que no hay ganador, false es que hay empate
+  // null means there is no winner, false means there is a tie
   const [winner, setWinner] = useState(null)
 
   
@@ -38,20 +38,20 @@ function App() {
 
 
   const updateBoard = (index) => {
-    // no actualizamos esta posición
-    // si el board ya tiene algo
+    // we do not update this position
+    // if the board already has something
     if(board[index] || winner) return
-    const newBoard = [... board] // creamos un nuevo board porque no podemos mutar las propiedades ni los estados
-    newBoard[index] = turn // con esto recibimos el indice y puede ser "x" ó "o"
+    const newBoard = [... board] // We create a new board because we cannot mutate the properties or states
+    newBoard[index] = turn // With this we receive the index and it can be "x" or "o"
     setBoard(newBoard)
 
-    // cambiar el turno
+    // change the shift
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
-    // guardar partida
+    // save game
     window.localStorage.setItem('board', JSON.stringify(newBoard))
     window.localStorage.setItem('turn', newTurn)
-    // revisar si hay ganador
+    // check if there is a winner
     const newWinner = checkWinnerfrom(newBoard)
     if(newWinner) {
       setWinner(newWinner)
